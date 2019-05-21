@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>City guide</title>
+
+
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+crossorigin=""></script>
+
+
+<!-- Load Esri Leaflet from CDN -->
+<script src="https://unpkg.com/esri-leaflet@2.2.4/dist/esri-leaflet.js"
+integrity="sha512-tyPum7h2h36X52O2gz+Pe8z/3l+Y9S1yEUscbVs5r5aEY5dFmP1WWRY/WLLElnFHa+k1JBQZSCDGwEAnm2IxAQ=="
+crossorigin=""></script>
+
+
+<!-- Load Esri Leaflet Geocoder from CDN -->
+<link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.2.13/dist/esri-leaflet-geocoder.css"
+integrity="sha512-v5YmWLm8KqAAmg5808pETiccEohtt8rPVMGQ1jA6jqkWVydV5Cuz3nJ9fQ7ittSxvuqsvI9RSGfVoKPaAJZ/AQ=="
+crossorigin="">
+<script src="https://unpkg.com/esri-leaflet-geocoder@2.2.13/dist/esri-leaflet-geocoder.js"
+integrity="sha512-zdT4Pc2tIrc6uoYly2Wp8jh6EPEWaveqqD3sT0lf5yei19BC1WulGuh5CesB0ldBKZieKGD7Qyf/G0jdSe016A=="
+crossorigin=""></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+
+
+
+
+        <link rel="stylesheet" href="js/jquery.mobile-1.4.5.css">
+         <script src="js/jquery.js"></script>
+         <script src="js/jquery.mobile-1.4.5.js"></script>
+
+
+
+
+
+
+
+    <style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial;
+}
+
+/* The grid: Four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+/* Style the images inside the grid */
+.column img {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.column img:hover {
+  opacity: 1;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The expanding image container */
+.container {
+  position: relative;
+  display: none;
+}
+
+/* Expanding image text */
+#imgtext {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  color: white;
+  font-size: 20px;
+}
+
+/* Closable button inside the expanded image */
+.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+
+
+#icons{
+		margin: 2px;
+		position: relative;
+		padding: 4px 0;
+		cursor: pointer;
+		float: left;
+		list-style: none;
+	}
+
+
+#map { position: absolute;
+
+top:50%;
+       z-index: 0;
+       width: 95%;
+                height: 70%;
+                margin-bottom: 5%;
+
+                margin-right: 5%;
+
+     }
+
+
+
+
+
+</style>
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+
+			$("linkpg").click(function(){
+					window.location.href="C:/Users/user/Documents/uni/uni/uni/MobileAPPdev/leaflet/esri leaflet/Jquery mobile map/map33.html";
+			});
+
+
+		navigator.geolocation.getCurrentPosition(userLocated,locationError); //get the current position of the user
+function userLocated(position) {
+var latitude = position.coords.latitude; // store the cordinate of the latitude
+var longitude = position.coords.longitude; // store the cordinate of the latitude
+var timeOfLocation = position.timestamp;
+// alert("lat:"+latitude+"   "+"long:"+longitude);
+ var map = L.map('map').setView([latitude, longitude], 12);
+ // var newMarker = new L.marker(latlng(latitude, longitude)).addTo(map);
+ var marker = L.marker([latitude, longitude], { title: "My marker" }).addTo(map);
+                marker.bindPopup("Hello ").openPopup();
+
+
+
+  L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  var searchControl = new L.esri.Controls.Geosearch().addTo(map);
+
+  var results = new L.LayerGroup().addTo(map);
+
+  searchControl.on('results', function(data){
+    results.clearLayers();
+    for (var i = data.results.length - 1; i >= 0; i--) {
+      results.addLayer(L.marker(data.results[i].latlng));
+    }
+  });
+
+
+}
+function locationError(error) {
+alert(error.code); // if it encounter any error , this line catches the error an alert it to the user.
+}
+
+
+
+
+
+
+
+	});
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="cordova.js"></script>
+
+
+<script type="text/javascript">
+
+document.addEventListener("deviceready",onDeviceReady, false);
+var db;
+function onDeviceReady(){
+
+alert("Device Ready");
+db = window.openDatabase("myUserDB","1.0","simple demo",2*1024*1024);
+db.transaction(createDB, errorCB, successCB );
+
+}
+function createDB(tx){
+tx.executeSql('CREATE TABLE IF NOT EXISTS user(id INT,firstname TEXT, lastname TEXT,address TEXT,email TEXT,username TEXT,password TEXT)');
+}
+function errorCB(err){
+alert("Error: "+err.code);
+
+}
+function successCB(){
+alert("Database and Table CREATED SUCCESSFULLY");
+
+}
+
+function insertDB(tx){
+var firstname_c=$("[name='firstname']").val();
+
+var lastname_c=$("[name='lastname']").val();
+
+var address_c=$("[name='address']").val();
+
+var email_c=$("[name='email']").val();
+
+var username_c=$("[name='username']").val();
+
+var password_c=$("[name='password']").val();
+
+
+var sql='INSERT INTO user (firstname, lastname, address, email, username, password) VALUES (?,?,?,?,?,?)';
+
+
+
+tx.executeSql(sql,[firstname_c,lastname_c,address_c,email_c,username_c,password_c], successQueryDB, errorCB);
+}
+
+function successQueryDB(tx){
+alert("Record Inserted");
+tx.executeSql('SELECT * FROM user', [], renderList, errorCB);
+}
+
+function renderList(tx, results){
+
+var htmlString = ' ';
+var len = results.rows.length;
+for(var i=0; i<len;i++){
+htmlString+='<li>'+results.rows.item(i).firstname+'<br>'+results.rows.item(i).lastname+'<br>'+results.rows.item(i).address+'<br>'+results.rows.item(i).email+'<br>'+results.rows.item(i).username+'</li>';
+}
+$('#resultList').html(htmlString);
+$('#resultList').listview('refresh');
+
+}
+
+
+function dropDB(tx){
+var sqlClear='DROP table book';
+tx.executeSql(sqlClear);
+}
+function successQueryRM(tx){
+alert("Deleted SUCCESSFULLY");
+
+}
+
+
+function Clear(tx){
+db.transaction(dropDB, successQueryRM, errorCB);
+
+}
+
+
+function submitForm(){
+db.transaction(insertDB, errorCB);
+$.mobile.changePage("#pagetwo", {reverse:false, transition:"slide"});
+return false;
+}
+
+
+
+
+
+</script>
+
+
+
+
+
+
+<script>
+
+
+// Name and Password from the register-form
+var username = document.getElementById('username');
+var password = document.getElementById('password');
+
+// storing input from register-form
+function store() {
+    localStorage.setItem('username', username.value);
+    localStorage.setItem('password', password.value);
+}
+
+// check if stored data from register-form is equal to entered data in the   login-form
+function check() {
+
+    // stored data from the register-form
+    var storedName = localStorage.getItem('username');
+    var storedPw = localStorage.getItem('password');
+
+    // entered data from the login-form
+    var username = document.getElementById('username');
+    var password = document.getElementById('password');
+
+    // check if stored data from register-form is equal to data from login form
+    if(username.value !== storedName && password.value !== storedPw) {
+
+    $.mobile.changePage("#page3", {reverse:false, transition:"slide"});
+return false;
+    }else {
+        alert('ERROR you are not login');
+    }
+
+    
+}
+
+
+
+
+
+
+ function check(){
+
+
+ window.location.href = "main.html";
+
+
+ }
+
+
+
+
+
+</script>
+
+
+
+
+<style>
+/* Style all input fields */
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+}
+
+/* Style the submit button */
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Style the container for inputs */
+.container {
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* The message box is shown when the user clicks on the password field */
+#message {
+  display:none;
+  background: #f1f1f1;
+  color: #000;
+  position: relative;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+#message p {
+  padding: 10px 35px;
+  font-size: 18px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -35px;
+  content: "✔";
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -35px;
+  content: "✖";
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </head>
+    <body>
+
+
+
+
+
+
+			<script src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
+<link rel="stylesheet" type="text/css" href="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
+
+
+
+
+
+
+
+
+
+<div data-role="page" id="page1" data-theme="b">
+
+	<div data-role="header">
+		<h1>User details</h1>
+	</div><!-- /header -->
+
+
+<div data-role="main" class="ui-content">
+
+<form method="post" onSubmit="return submitForm()">
+<label class="ui-accessible">Firstname:</label>
+<input name="firstname" type="text" placeholder="firstname" required/>
+
+
+<label class="ui-accessible">Lastname:</label>
+<input name="lastname" type="text" placeholder="lastname" required/>
+
+<label class="ui-accessible">Address:</label>
+<input name="address" type="text" placeholder="address" required/>
+
+<label class="ui-accessible">Email:</label>
+<input name="email" type="text" placeholder="address" required/>
+
+<label class="ui-accessible">Username:</label>
+<input name="username" type="text" placeholder="username" required/>
+
+<label class="ui-accessible">Password:</label>
+<input name="password" type="text" placeholder="password" required/>
+
+
+
+
+<input type="submit" value="submit"/>
+</form>
+</div>
+
+<a href="#pagetwo" class="ui-btn">go to login</a>
+
+
+
+
+<div data-role="footer">
+		<h1>Working with SQlite</h1>
+	</div><!-- /header -->
+
+
+	</div>
+
+
+
+
+		<div data-role="page" id="pagetwo" data-theme="b">
+
+
+<div data-role="header">
+<h1>Login</h1>
+</div>
+
+
+
+<div data-role="main" class="ui-content">
+
+<div id="output">
+
+
+
+ <form id="login-form">
+
+         <label class="ui-accessible">Username:</label>
+        <input id="username" type="text" placeholder="Enter Username" value="" required/>
+		<label class="ui-accessible">Password:</label>
+        <input id="password" type="password" placeholder="Enter Password" value="" required/>
+
+        <input id="login_btn" type="button" value="Login" onClick="check()"/>
+    </form>
+
+
+
+
+</div>
+</div>
+
+
+
+<a  href="#page1" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-back">Go back</a>
+
+
+
+<div data-role="footer">
+<h1>City Guide</h1>
+</div>
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div data-role="page" id="page4" data-theme="c">
+
+
+	<div data-role="header">
+		<h1>City Guide</h1>
+
+	</div><!-- /header -->
+
+	<!-- /content -->
+	<div role="main" class="ui-content">
+
+		<div style="text-align:center">
+  <h2>MAP</h2>
+  <p>here is your destination</p>
+</div>
+
+
+<div id="map"></div>
+
+
+
+
+
+
+	</div><!-- /content -->
+
+
+</div><!-- /page -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+</html>

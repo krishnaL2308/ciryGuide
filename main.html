@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>City Guide</title>
+
+
+        <link rel="stylesheet" href="js/jquery.mobile-1.4.5.css">
+         <script src="js/jquery.js"></script>
+         <script src="js/jquery.mobile-1.4.5.js"></script>
+
+
+
+
+         <style>
+         * {box-sizing: border-box}
+         body {font-family: Verdana, sans-serif; margin:0}
+         .mySlides {display: none}
+         img {vertical-align: middle;}
+
+         /* Slideshow container */
+         .slideshow-container {
+           max-width: 1000px;
+           position: relative;
+           margin: auto;
+         }
+
+         /* Next & previous buttons */
+         .prev, .next {
+           cursor: pointer;
+           position: absolute;
+           top: 50%;
+           width: auto;
+           padding: 16px;
+           margin-top: -22px;
+           color: white;
+           font-weight: bold;
+           font-size: 18px;
+           transition: 0.6s ease;
+           border-radius: 0 3px 3px 0;
+           user-select: none;
+         }
+
+         /* Position the "next button" to the right */
+         .next {
+           right: 0;
+           border-radius: 3px 0 0 3px;
+         }
+
+         /* On hover, add a black background color with a little bit see-through */
+         .prev:hover, .next:hover {
+           background-color: rgba(0,0,0,0.8);
+         }
+
+         /* Caption text */
+         .text {
+           color: #f2f2f2;
+           font-size: 15px;
+           padding: 8px 12px;
+           position: absolute;
+           bottom: 8px;
+           width: 100%;
+           text-align: center;
+         }
+
+         /* Number text (1/3 etc) */
+         .numbertext {
+           color: #f2f2f2;
+           font-size: 12px;
+           padding: 8px 12px;
+           position: absolute;
+           top: 0;
+         }
+
+         /* The dots/bullets/indicators */
+         .dot {
+           cursor: pointer;
+           height: 15px;
+           width: 15px;
+           margin: 0 2px;
+           background-color: #bbb;
+           border-radius: 50%;
+           display: inline-block;
+           transition: background-color 0.6s ease;
+         }
+
+         .active, .dot:hover {
+           background-color: #717171;
+         }
+
+         /* Fading animation */
+         .fade {
+           -webkit-animation-name: fade;
+           -webkit-animation-duration: 1.5s;
+           animation-name: fade;
+           animation-duration: 1.5s;
+         }
+
+         @-webkit-keyframes fade {
+           from {opacity: .4}
+           to {opacity: 1}
+         }
+
+         @keyframes fade {
+           from {opacity: .4}
+           to {opacity: 1}
+         }
+
+         /* On smaller screens, decrease text size */
+         @media only screen and (max-width: 300px) {
+           .prev, .next,.text {font-size: 11px}
+         }
+         </style>
+
+
+</script>
+
+	<style>
+		body{
+			padding: 0px;
+			margin: 0px;
+			font-family: sans-serif;
+		}
+		.app_container{
+			height: 510px;
+			width: 310px;
+			background-color: #ECF0F1;
+			margin: 100px auto 0;
+		}
+		.app_head{
+			height: 60px;
+			width: 310px;
+			float: left;
+			background-color: #2C3D51;
+			line-height: 60px;
+			font-size: 20px;
+			text-align: center;
+			color: #fff;
+		}
+		.places_tile{
+			height: 100px;
+			width: 140px;
+			background-color: #777;
+			margin: 10px 0px 0px 10px;
+			float: left;
+			line-height: 100px;
+			text-align: center;
+			font-size: 18px;
+			color: #fff;
+		}
+		.tile_1{
+			background-color: #E55038;
+		}
+		.tile_2{
+			background-color: #009788;
+		}
+		.tile_3{
+			background-color: #00BCD5;
+		}
+		.tile_4{
+			background-color: #4D342F;
+		}
+		.tile_5{
+			background-color: #607D8B;
+		}
+		.tile_6{
+			background-color: #DA5653;
+		}
+		.tile_7{
+			background-color: #87426C;
+		}
+		.tile_8{
+			background-color: #CDDC39;
+		}
+
+    #seebtn{
+      color:lime;
+    }
+	</style>
+
+
+
+
+
+
+<script>
+
+function nearby(){
+
+
+ window.location.href = "nearby.html";
+
+
+ }
+
+
+
+
+ function weather(){
+
+
+  window.location.href = "weather.html";
+
+
+  }
+
+
+   function Search(){
+
+
+    window.location.href = "search.html";
+
+
+    }
+
+
+     function home(){
+
+
+      window.location.href = "main.html";
+
+
+      }
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+    </head>
+    <body>
+        <script type="text/javascript" src="cordova.js"></script>
+
+
+
+
+
+
+
+        <!-- page2 -->
+
+        <div data-role="page" id="page1" data-theme="b" >
+
+        	<div data-role="header">
+        		<h1>City Guide</h1>
+
+
+             <button><a href="#mypanel" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-bars"></a></button>
+
+
+        	</div><!-- /header -->
+
+
+
+
+
+	<div data-role="panel" id="mypanel">
+
+	<div data-role="header">
+<h2>City Guide</h2>
+</div>
+</br>
+<p>More Information</p>
+
+<ul>
+
+   <li><a href="main.html" onClick="home()">Home</a></li></br>
+
+  <li><a href="weather.html" onClick="weather()">weather Info</a></li></br>
+  <li><a href="search.html" onClick="Search()">Search Places</a></li></br>
+   <li><a href="Nearby.html" onClick="nearby()">Nearby Location</a></li>
+
+</ul>
+</div>
+
+
+
+
+
+        	<!-- /content -->
+        	<div role="main" class="ui-content">
+
+        <h2><u>Welcome to City Guide</u></h2>
+
+</br>
+
+<h4> mautitius sea activities</h4>
+  <div class="slideshow-container">
+
+  <div class="mySlides fade">
+    <div class="numbertext">1 / 3</div>
+    <img src="img/choisy.jpg" style="width:100%">
+    <div class="text">mon choisy</div>
+  </div>
+
+  <div class="mySlides fade">
+    <div class="numbertext">2 / 3</div>
+    <img src="img/lacuvette.jpg" style="width:100%">
+    <div class="text">Caption Two</div>
+  </div>
+
+  <div class="mySlides fade">
+    <div class="numbertext">3 / 3</div>
+    <img src="img/morne.jpg" style="width:100%">
+    <div class="text">Caption Three</div>
+  </div>
+
+  </div>
+  <br>
+
+  <div style="text-align:center">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+
+
+  <a href="#page2" data-transition="flip" class="ui-btn" id="seebtn">See More</a>
+</br>
+
+
+<h4>Nature parks</h4>
+  <div class="slideshow-container1">
+
+  <div class="mySlides1 fade">
+    <div class="numbertext">1 / 3</div>
+    <img src="img/valey.jpg" style="width:100%">
+    <div class="text">Caption Text</div>
+  </div>
+
+  <div class="mySlides1 fade">
+    <div class="numbertext">2 / 3</div>
+    <img src="img/bras.jpg" style="width:100%">
+    <div class="text">Caption Two</div>
+  </div>
+
+  <div class="mySlides1 fade">
+    <div class="numbertext">3 / 3</div>
+    <img src="img/val.jpg" style="width:100%">
+    <div class="text">Caption Three</div>
+  </div>
+
+  </div>
+  <br>
+
+  <div style="text-align:center">
+    <span class="dot1"></span>
+    <span class="dot1"></span>
+    <span class="dot1"></span>
+  </div>
+
+  <a href="#page3" data-transition="slide" class="ui-btn" id="seebtn">See More</a>
+
+</br>
+
+
+<h4>Restaurants</h4>
+
+<div class="slideshow-container2">
+
+<div class="mySlides2 fade">
+  <div class="numbertext">1 / 3</div>
+  <img src="img/eureka.jpg" style="width:100%">
+  <div class="text">Caption Text</div>
+</div>
+
+<div class="mySlides2 fade">
+  <div class="numbertext">2 / 3</div>
+  <img src="img/anna.jpg" style="width:100%">
+  <div class="text">Caption Two</div>
+</div>
+
+<div class="mySlides2 fade">
+  <div class="numbertext">3 / 3</div>
+  <img src="img/fangourin.jpg" style="width:100%">
+  <div class="text">Caption Three</div>
+</div>
+
+</div>
+<br>
+
+<div style="text-align:center">
+  <span class="dot2"></span>
+  <span class="dot2"></span>
+  <span class="dot2"></span>
+</div>
+
+<a href="#page4" data-transition="slide" class="ui-btn" id="seebtn">See More</a>
+
+</br>
+
+
+<h4>Beaches</h4>
+
+<div class="slideshow-container3">
+
+<div class="mySlides3 fade">
+  <div class="numbertext">1 / 3</div>
+  <img src="img/perebere.jpg" style="width:100%">
+  <div class="text">Caption Text</div>
+</div>
+
+<div class="mySlides3 fade">
+  <div class="numbertext">2 / 3</div>
+  <img src="img/gris.jpg" style="width:100%">
+  <div class="text">Caption Two</div>
+</div>
+
+<div class="mySlides3 fade">
+  <div class="numbertext">3 / 3</div>
+  <img src="img/lemorneB.jpg" style="width:100%">
+  <div class="text">Caption Three</div>
+</div>
+
+</div>
+<br>
+
+<div style="text-align:center">
+  <span class="dot3"></span>
+  <span class="dot3"></span>
+  <span class="dot3"></span>
+</div>
+
+
+<a href="#page5" data-transition="slide" class="ui-btn" id="seebtn">See More</a>
+
+</br>
+
+
+<h4>Zoo</h4>
+
+<div class="slideshow-container4">
+
+<div class="mySlides4 fade">
+  <div class="numbertext">1 / 3</div>
+  <img src="img/casela.jpg" style="width:100%">
+  <div class="text">Caption Text</div>
+</div>
+
+<div class="mySlides4 fade">
+  <div class="numbertext">2 / 3</div>
+  <img src="img/vanille.jpg" style="width:100%">
+  <div class="text">Caption Two</div>
+</div>
+
+<div class="mySlides4 fade">
+  <div class="numbertext">3 / 3</div>
+  <img src="img/aqua.jpg" style="width:100%">
+  <div class="text">Caption Three</div>
+</div>
+
+</div>
+<br>
+
+<div style="text-align:center">
+  <span class="dot4"></span>
+  <span class="dot4"></span>
+  <span class="dot4"></span>
+</div>
+
+
+<a href="#page6" data-transition="slide" class="ui-btn" id="seebtn">See More</a>
+
+
+</br>
+
+
+<h4>Shopping</h4>
+
+<div class="slideshow-container5">
+
+<div class="mySlides5 fade">
+  <div class="numbertext">1 / 3</div>
+  <img src="img/central.jpg" style="width:100%">
+  <div class="text">Caption Text</div>
+</div>
+
+<div class="mySlides5 fade">
+  <div class="numbertext">2 / 3</div>
+  <img src="img/gb.jpg" style="width:100%">
+  <div class="text">Caption Two</div>
+</div>
+
+<div class="mySlides5 fade">
+  <div class="numbertext">3 / 3</div>
+  <img src="img/m.jpg" style="width:100%">
+  <div class="text">Caption Three</div>
+</div>
+
+</div>
+<br>
+
+<div style="text-align:center">
+  <span class="dot5"></span>
+  <span class="dot5"></span>
+  <span class="dot5"></span>
+</div>
+
+<a href="#page7" data-transition="slide" class="ui-btn" id="seebtn">See More</a>
+
+
+
+
+  <script>
+  var slideIndex = 0;
+  showSlides();
+
+  function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+   slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  for (i = 0; i < dots.length; i++) {
+   dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+  }
+  </script>
+
+
+    <script>
+    var slideIndex1 = 0;
+    showSlides1();
+
+    function showSlides1() {
+    var i;
+    var slides = document.getElementsByClassName("mySlides1");
+    var dots= document.getElementsByClassName("dot1");
+    for (i = 0; i < slides.length; i++) {
+     slides[i].style.display = "none";
+    }
+    slideIndex1++;
+    if (slideIndex1 > slides.length) {slideIndex1 = 1}
+    for (i = 0; i < dots.length; i++) {
+     dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex1-1].style.display = "block";
+    dots[slideIndex1-1].className += " active";
+    setTimeout(showSlides1, 3000); // Change image every 2 seconds
+    }
+    </script>
+
+
+
+
+        <script>
+        var slideIndex2 = 0;
+        showSlides2();
+
+        function showSlides2() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides2");
+        var dots= document.getElementsByClassName("dot2");
+        for (i = 0; i < slides.length; i++) {
+         slides[i].style.display = "none";
+        }
+        slideIndex2++;
+        if (slideIndex2 > slides.length) {slideIndex2 = 1}
+        for (i = 0; i < dots.length; i++) {
+         dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex2-1].style.display = "block";
+        dots[slideIndex2-1].className += " active";
+        setTimeout(showSlides2, 4000); // Change image every 2 seconds
+        }
+        </script>
+
+
+
+        <script>
+        var slideIndex3 = 0;
+        showSlides3();
+
+        function showSlides3() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides3");
+        var dots= document.getElementsByClassName("dot3");
+        for (i = 0; i < slides.length; i++) {
+         slides[i].style.display = "none";
+        }
+        slideIndex3++;
+        if (slideIndex3 > slides.length) {slideIndex3 = 1}
+        for (i = 0; i < dots.length; i++) {
+         dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex3-1].style.display = "block";
+        dots[slideIndex3-1].className += " active";
+        setTimeout(showSlides3, 5000); // Change image every 2 seconds
+        }
+        </script>
+
+
+
+
+                <script>
+                var slideIndex4 = 0;
+                showSlides4();
+
+                function showSlides4() {
+                var i;
+                var slides = document.getElementsByClassName("mySlides4");
+                var dots= document.getElementsByClassName("dot4");
+                for (i = 0; i < slides.length; i++) {
+                 slides[i].style.display = "none";
+                }
+                slideIndex4++;
+                if (slideIndex4 > slides.length) {slideIndex4 = 1}
+                for (i = 0; i < dots.length; i++) {
+                 dots[i].className = dots[i].className.replace(" active", "");
+                }
+                slides[slideIndex4-1].style.display = "block";
+                dots[slideIndex4-1].className += " active";
+                setTimeout(showSlides4, 6000); // Change image every 2 seconds
+                }
+                </script>
+
+
+
+
+
+                <script>
+                var slideIndex5 = 0;
+                showSlides5();
+
+                function showSlides5() {
+                var i;
+                var slides = document.getElementsByClassName("mySlides5");
+                var dots= document.getElementsByClassName("dot5");
+                for (i = 0; i < slides.length; i++) {
+                 slides[i].style.display = "none";
+                }
+                slideIndex5++;
+                if (slideIndex5 > slides.length) {slideIndex5 = 1}
+                for (i = 0; i < dots.length; i++) {
+                 dots[i].className = dots[i].className.replace(" active", "");
+                }
+                slides[slideIndex5-1].style.display = "block";
+                dots[slideIndex5-1].className += " active";
+                setTimeout(showSlides5, 7000); // Change image every 2 seconds
+                }
+                </script>
+
+
+
+
+
+
+        	</div><!-- /content -->
+
+
+        	<!-- /footer -->
+        	<div data-role="footer">
+        		<h4></h4>
+        	</div><!-- /footer -->
+
+
+        </div><!-- /page -->
+
+
+
+
+
+
+
+
+        <div data-role="page" id="page2" data-theme="b">
+
+
+        	<div data-role="header">
+        		<h1>Mautitius Sea Activities</h1>
+
+
+
+        	</div><!-- /header -->
+
+
+        	<!-- /content -->
+        	<div role="main" class="ui-content">
+
+          </br>
+        </br>
+
+        <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Stand up paddle (SUP) at Mont Choisy</a>
+        <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Windsurf rental package for experienced surfers</a>
+       <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Mauritius Marine Discovery Package</a>
+       <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Budget Day Package at Ile Aux Cerfs</a>
+      <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Parasailing</a>
+
+
+
+
+         <div id="txt1" >
+
+
+             <h6 style="color:red;">*new sugesstion</h6>
+           <a  class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Stand up paddle (SUP) at Mont Choisy</a>
+
+
+            <h6 style="color:red;">*new sugesstion</h6>
+           <a  class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Windsurf rental package for experienced surfers</a>
+
+
+            <h6 style="color:red;">*new sugesstion</h6>
+          <a id="txt3" class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Mauritius Marine Discovery Package</a>
+
+
+
+         </div>
+
+
+      <script>
+      $(document).ready(function() {
+          setTimeout( function(){$("#txt1").hide().fadeIn(20000);}, 700);
+
+      });
+
+      </script>
+
+
+
+        	</div><!-- /content -->
+
+
+        </div><!-- /page -->
+
+
+
+        <div data-role="page" id="page3" data-theme="b">
+
+
+         <div data-role="header">
+           <h1>Nature Parks</h1>
+
+
+
+         </div><!-- /header -->
+
+
+         <!-- /content -->
+         <div role="main" class="ui-content">
+
+          </br>
+        </br>
+
+        <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >La Vallee Des Couleurs Nature Park</a>
+        <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Bras D'Eau National Park</a>
+       <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Le Val Nature Park</a>
+       <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >La Vallée de Ferney</a>
+      <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Domaine De L'Etoile</a>
+
+
+      <div id="txt2" >
+
+
+          <h6 style="color:red;">*new sugesstion</h6>
+        <a  class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Stand up paddle (SUP) at Mont Choisy</a>
+
+
+         <h6 style="color:red;">*new sugesstion</h6>
+        <a  class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Windsurf rental package for experienced surfers</a>
+
+
+         <h6 style="color:red;">*new sugesstion</h6>
+       <a id="txt3" class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Mauritius Marine Discovery Package</a>
+
+
+
+      </div>
+
+
+     <script>
+     $(document).ready(function() {
+       setTimeout( function(){$("#txt2").hide().fadeIn(20000);}, 700);
+
+     });
+
+     </script>
+
+
+
+
+
+         </div><!-- /content -->
+
+
+        </div><!-- /page -->
+
+
+
+        <div data-role="page" id="page4" data-theme="b">
+
+
+         <div data-role="header">
+           <h1>Restaurants</h1>
+
+
+
+         </div><!-- /header -->
+
+
+         <!-- /content -->
+         <div role="main" class="ui-content">
+
+          </br>
+        </br>
+
+        <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Maison Eureka</a>
+        <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Le Barachois Restaurant</a>
+       <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Le Chateau de Bel Ombre Heritage</a>
+       <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Domaine Anna Restaurant</a>
+      <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Le Fangourin</a>
+
+
+
+
+      <div id="txt3" >
+
+
+          <h6 style="color:red;">*new sugesstion</h6>
+        <a  class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Stand up paddle (SUP) at Mont Choisy</a>
+
+
+         <h6 style="color:red;">*new sugesstion</h6>
+        <a  class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Windsurf rental package for experienced surfers</a>
+
+
+         <h6 style="color:red;">*new sugesstion</h6>
+       <a id="txt3" class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Mauritius Marine Discovery Package</a>
+
+
+
+      </div>
+
+
+   <script>
+   $(document).ready(function() {
+       setTimeout( function(){$("#txt3").hide().fadeIn(20000);}, 700);
+
+   });
+
+   </script>
+
+
+
+
+
+
+         </div><!-- /content -->
+
+
+        </div><!-- /page -->
+
+
+        <div data-role="page" id="page5" data-theme="b">
+
+
+         <div data-role="header">
+           <h1>Beaches</h1>
+
+
+
+         </div><!-- /header -->
+
+
+         <!-- /content -->
+         <div role="main" class="ui-content">
+
+          </br>
+        </br>
+
+        <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Mont Choisy Beach</a>
+        <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >La Cuvette Beach</a>
+       <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Pereybere Beach</a>
+       <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Le Morne Beach</a>
+      <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Gris Gris Beach</a>
+
+
+
+
+
+         </div><!-- /content -->
+
+
+        </div><!-- /page -->
+
+
+        <div data-role="page" id="page6" data-theme="b">
+
+
+         <div data-role="header">
+           <h1>ZOO</h1>
+
+
+
+         </div><!-- /header -->
+
+
+         <!-- /content -->
+         <div role="main" class="ui-content">
+
+          </br>
+        </br>
+
+        <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Casela World of Adventures</a>
+        <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >La Vanille Nature Park</a>
+       <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Aquarium Mauritius</a>
+       <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Tortoise Pen Mauritius</a>
+      <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Horse Riding Mauritius</a>
+
+
+
+
+
+         </div><!-- /content -->
+
+
+        </div><!-- /page -->
+
+
+        <div data-role="page" id="page7" data-theme="b">
+
+
+         <div data-role="header">
+           <h1>Shopping</h1>
+
+
+
+         </div><!-- /header -->
+
+
+         <!-- /content -->
+         <div role="main" class="ui-content">
+
+          </br>
+        </br>
+
+        <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Port Louis Central Market</a>
+        <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Grand Baie Bazar</a>
+       <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Shopping Mall Le Caudan Waterfront</a>
+       <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Bagatelle Mall</a>
+      <a class="ui-btn ui-icon-location ui-btn-icon-left" width="50px" height="50px" >Goodlands Market</a>
+
+
+
+
+
+         </div><!-- /content -->
+
+
+        </div><!-- /page -->
+
+
+
+
+
+        <script src="external/jquery/jquery.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <script src="js/tabs.js"></script>
+
+
+    </body>
+</html>
